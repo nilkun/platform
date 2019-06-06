@@ -28,8 +28,7 @@ export default class Level {
     }
 
     getTile(x, y) {
-        if(x < this.height && y < this.height) {
-            // console.log("rendering:" , y, x);
+        if(x < this.width && y < this.height) {
             return this.tile[Math.floor(y)][Math.floor(x)];
         }
         console.log("OOB: ", x, y);
@@ -38,19 +37,18 @@ export default class Level {
 
 
     render(callback, camera) {
-        let tile;
-        for(let row = 0; row < game.ROWS; row++) {
-            for(let col = 0; col < game.COLUMNS; col++) {             
-                switch(tile = this.getTile(
-                    row + camera.offset.x, 
-                    col + camera.offset.y
+        for(let row = 0; row < game.ROWS + 1; row++) {
+            for(let col = 0; col < game.COLUMNS + 1; col++) {             
+                switch(this.getTile(
+                    col + camera.offset.x,
+                    row + camera.offset.y, 
                 )) {
                     case 0:
                         break;
                     case 1: 
                         callback(
                             this.sprite,
-                            { x: row, y: col }
+                            { x: col - camera.offset.x%1, y: row  - camera.offset.y%1 }
                         );
                         // renderBox(  
                         //     Math.floor( tileSize * (col - (camera.offset.x%1))),

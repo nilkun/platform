@@ -27,8 +27,8 @@ export default class Renderer {
             sprite.width, 
             sprite.height,
             
-            Math.floor(game.TILESIZE * (position.x - this.camera.offset.x)),
-            Math.floor(game.TILESIZE * (position.y - this.camera.offset.y)),
+            Math.floor(game.TILESIZE * position.x),
+            Math.floor(game.TILESIZE * position.y),
             Math.floor(game.TILESIZE * scale.x), 
             Math.floor(game.TILESIZE * scale.y),
         );

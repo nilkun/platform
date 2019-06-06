@@ -21,8 +21,9 @@ export default class Player {
         this.sprite = new Sprite(8, 0, 8, 16, 0);
         this.level; // Pointer to current level layout
     }
-    render(callback) {
-        callback(this.sprite, this.position, this.scale);
+    render(callback, camera) {
+        const pos = new Vector(this.position.x - camera.offset.x, this.position.y - camera.offset.y)
+        callback(this.sprite, pos, this.scale);
     }
     // render(renderer, offset, tileSize) {
     //     renderer.drawImage(
@@ -55,7 +56,7 @@ export default class Player {
         //     || this.level[Math.floor(object.position.y + object.size.y)][Math.floor(object.position.x + object.size.x)] === 1
         // ) return false;
         // return true;
-        console.log(Math.floor(this.position.y))
+        // console.log(Math.floor(this.position.y))
         return (this.level[Math.floor(this.position.y)][Math.floor(this.position.x)]
             || this.level[Math.floor(this.position.y + this.scale.y)][Math.floor(this.position.x)]
             || this.level[Math.floor(this.position.y)][Math.floor(this.position.x + this.scale.x)]
