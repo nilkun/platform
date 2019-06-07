@@ -17,8 +17,10 @@ export default class Renderer {
     render(
         sprite, 
         position, 
-        scale = { x: 1, y: 1 } 
+        scale = { x: 1, y: 1 },
+        flip = false
     ) {
+        // if(flip) this.renderer.scale(-1, 1);
         this.renderer.drawImage(
             sprite.data,
 
