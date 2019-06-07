@@ -28,10 +28,9 @@ export default class Level {
     }
 
     getTile(x, y) {
-        if(x < this.width && y < this.height) {
+        if(x < this.width && y < this.height && x >= 0 && y >= 0) {
             return this.tile[Math.floor(y)][Math.floor(x)];
         }
-        console.log("OOB: ", x, y);
         return 0;
     }
 

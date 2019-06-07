@@ -202,6 +202,7 @@ const renderBox = (x, y) => {
     renderer.drawImage(
         assets.images[0],
         tPos.x, tPos.y, tPos.width, tPos.height, 
+        
         x, y, tileSize, tileSize, 
     );
 }
