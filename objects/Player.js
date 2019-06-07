@@ -17,10 +17,13 @@ export default class Player {
         this.scale = new Vector(0.4, 0.8);
         this.velocity = new Vector(0, 0);
         this.sprite = new Sprite(8, 0, 8, 16, 0);
+
+        this.sprite = new Sprite(0, 16, 8, 16, 0);
         this.level; // Pointer to current level layout
         this.speed = .3;
         this.gravity = 1.2;
         this.isJumping = true;
+        this.currentFrame = 0;
     }
     render(callback, camera) {
         const pos = new Vector(this.position.x - camera.offset.x, this.position.y - camera.offset.y)
@@ -28,12 +31,17 @@ export default class Player {
     }
 
     isNotLegal(x, y) {
-        console.log(x, y)
+        // console.log(x, y)
         return (this.level[Math.floor(y)][Math.floor(x)]
             || this.level[Math.floor(y + this.scale.y)][Math.floor(x)]
             || this.level[Math.floor(y)][Math.floor(x + this.scale.x)]
             || this.level[Math.floor(y + this.scale.y)][Math.floor(x + this.scale.x)]
         )
+    }
+    setFrame(delta) {
+        this.currentFrame = (this.currentFrame + delta) % 4;
+        // console.log(this.currentFrame)
+        this.sprite.x = Math.floor(this.currentFrame) * 8; // = new Sprite(0, 16, 8, 16, 0);
     }
 
     jump() {
@@ -44,6 +52,8 @@ export default class Player {
     }
 
     update(delta) {
+        
+        this.setFrame(delta);
         
         // There is always gravity
         this.velocity.y += this.gravity * delta;
